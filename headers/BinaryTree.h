@@ -24,4 +24,6 @@ class BinaryTree{
 
         int getDepth();
 
+        BinaryNode* search(int val);
+
 };

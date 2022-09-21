@@ -106,3 +106,56 @@ int BinaryTree::getDepth(){
         return 1;
     }
 }
+
+BinaryNode* BinaryTree::search(int val){
+    BinaryNode *node = root;
+    if(!root){
+        return NULL;
+    }else if(root -> data == val && !root -> null){
+        return root;
+    }
+    
+
+    BinaryNode *history[10] = {root};
+
+    int depth = 1;
+
+    while(true){
+        std::cout << depth << " , " << node -> data << std::endl;
+        if(node -> left){
+            node = node -> left;
+            if(node -> data == val && !node -> null){
+                return node;
+            }
+            history[depth++] = node;
+        }else{
+            if(node -> right){
+                node = node -> right;
+                if(node -> data == val && !node -> null){
+                    return node;
+                }
+                history[depth++] = node;
+            }else{
+                bool found = false;
+                while(!found){
+                    if(depth == 0){
+                        return NULL;
+                    }
+                    node = history[--depth];
+
+                    if(node -> right){
+                        node = node -> right;
+                        if(node -> data == val && !node -> null){
+                            return node;
+                        }
+                        history[depth++] = node; 
+                        found = true;
+                    }
+                }
+            }
+
+        }
+
+    }
+    return NULL;
+}
