@@ -1,4 +1,4 @@
-#include "LinkedList.h"
+#include "../headers/LinkedList.h"
 
 Node LinkedList::get(int index){
     Node *node = head;
