@@ -41,6 +41,9 @@ void BinaryTree::insert(int pos, int val){
 
 void BinaryTree::display(){
     int astmeid = getDepth();
+    if(astmeid == 0){
+        return;
+    }
     BinaryNode *node = root;
     PrintSpaces((pow(2, astmeid-1) - 1)*2);
     std::cout << "[" <<root -> data << "]" << std::endl;
@@ -120,7 +123,6 @@ BinaryNode* BinaryTree::search(int val){
     int depth = 1;
 
     while(true){
-        std::cout << depth << " , " << node -> data << std::endl;
         if(node -> left){
             node = node -> left;
             if(node -> data == val && !node -> null){
