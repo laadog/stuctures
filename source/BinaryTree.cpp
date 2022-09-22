@@ -45,7 +45,7 @@ void BinaryTree::display(){
     PrintSpaces((pow(2, astmeid-1) - 1)*2);
     std::cout << "[" <<root -> data << "]" << std::endl;
     bool roots = true;
-    for(int i = 1; roots == true && i < 5; i++){
+    for(int i = 1; roots == true; i++){
         roots = false;
         PrintSpaces((pow(2, astmeid-1-i) - 1)*2);
         for(int j = 0; j < pow(2, i); j++){
@@ -115,7 +115,6 @@ BinaryNode* BinaryTree::search(int val){
         return root;
     }
     
-
     BinaryNode *history[10] = {root};
 
     int depth = 1;
@@ -158,4 +157,52 @@ BinaryNode* BinaryTree::search(int val){
 
     }
     return NULL;
+}
+
+BinaryNode* BinaryTree::binarySearch(int val){
+    if(root == NULL){
+        return NULL;
+    }
+    BinaryNode *node = root;
+
+    while(true){
+        if(node -> data == val && !node -> null){
+            return node;
+        }else if(node -> data > val){
+            if(node -> left){
+                node = node -> left;
+            }else{
+                return NULL;
+            }
+        }else if(node -> data < val && !node -> null){
+            if(node -> right){
+                node = node -> right;
+            }else{
+                return NULL;
+            }
+        }
+    }
+}
+
+void BinaryTree::binaryInsert(int val){
+    if(root == NULL){
+        root = new BinaryNode(val);
+    }
+
+    BinaryNode *node = root;
+    while(true){
+        if(node -> data >= val){
+            if(node -> left == NULL || node -> left -> null){
+                node -> left = new BinaryNode(val);
+                return;
+            }
+            node = node -> left;
+        }else if(node -> data < val){
+            if(node -> right == NULL || node -> right -> null){
+                node -> right = new BinaryNode(val);
+                return;
+            }
+            node = node -> right;
+        }
+    }
 }

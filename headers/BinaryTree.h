@@ -26,4 +26,8 @@ class BinaryTree{
 
         BinaryNode* search(int val);
 
+        BinaryNode* binarySearch(int val);
+
+        void binaryInsert(int val);
+
 };
