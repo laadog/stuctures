@@ -77,6 +77,61 @@ class NativeData{
             }
         }
 
+        operator bool() const {
+            switch(type){
+                case undefined:
+                    return false;
+                break;
+                case boolType:
+                    return bool(*(bool*)dataPtr);
+                break; 
+                case intType:
+                {
+                    if(*(int*)dataPtr != 0){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                break;
+                case floatType:
+                {
+                    if(*(float*)dataPtr != 0){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                break;
+                case doubleType:
+                {
+                    if(*(double*)dataPtr != 0){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                break;
+                case charType:
+                {
+                    return true;
+                }
+                break;
+                case stringType:
+                    if(*(string*)dataPtr != ""){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                break;
+            }
+            return 0;
+        }
+
         operator int() const {
             switch(type){
                 case undefined:
@@ -115,6 +170,44 @@ class NativeData{
             }
             return 0;
         }
+
+        NativeData& operator = (bool val){
+            free(dataPtr);
+            this->type = boolType;
+            this->dataPtr = new bool(val);
+            return *this;
+        }
+        NativeData& operator = (int val){
+            free(dataPtr);
+            this->type = intType;
+            this->dataPtr = new int(val);
+            return *this;
+        }
+        NativeData& operator = (float val){
+            free(dataPtr);
+            this->type = floatType;
+            this->dataPtr = new float(val);
+            return *this;
+        }
+        NativeData& operator = (double val){
+            free(dataPtr);
+            this->type = doubleType;
+            this->dataPtr = new double(val);
+            return *this;
+        }
+        NativeData& operator = (char val){
+            free(dataPtr);
+            this->type = charType;
+            this->dataPtr = new char(val);
+            return *this;
+        }
+        NativeData& operator = (string val){
+            free(dataPtr);
+            this->type = stringType;
+            this->dataPtr = new string(val);
+            return *this;
+        }
+
 };
 
 
